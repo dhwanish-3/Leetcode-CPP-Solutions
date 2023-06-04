@@ -35,7 +35,7 @@ public:
                 }
             }
         }
-        return true;
+        return stk.empty();
     }
 };
 
