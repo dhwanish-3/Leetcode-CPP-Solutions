@@ -8,14 +8,23 @@ public:
         if(n==2) return true;
         double delY=coordinates[1][1]-coordinates[0][1];
         double delX=coordinates[1][0]-coordinates[0][0];
-        double slope=delY/delX;
+        bool perpendicular=false;
+        double slope=999.999;
+        if(delX==0) perpendicular=true;
+        else slope=delY/delX;
         double m;
         for(int i=2;i<n;i++){
             delY=coordinates[i][1]-coordinates[0][1];
             delX=coordinates[i][0]-coordinates[0][0];
-            m=delY/delX;
-            cout<<m<<" "<<slope<<endl;
-            if(m!=slope) return false;
+            if(slope==999.999 && delX!=0) return false;
+            else if(delX==0){
+                if(!perpendicular) return false;
+            }
+            else{
+                m=delY/delX;
+                cout<<m<<" "<<slope<<endl;
+                if(m!=slope) return false;
+            }
         }
         return true;
     }
