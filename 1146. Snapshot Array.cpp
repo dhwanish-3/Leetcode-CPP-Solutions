@@ -12,8 +12,8 @@ public:
     }
     
     void set(int index, int val) {
-        auto& lastSnap_id=snapShots[index].back().first;
-        auto& lastValue=snapShots[index].back().second;
+        int& lastSnap_id=snapShots[index].back().first;
+        int& lastValue=snapShots[index].back().second;
         if(lastSnap_id==snap_id) lastValue=val;
         else snapShots[index].emplace_back(snap_id,val);
     }
