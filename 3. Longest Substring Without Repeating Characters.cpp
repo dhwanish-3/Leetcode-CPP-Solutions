@@ -2,27 +2,17 @@
 using namespace std;
 
 class Solution {
-    map<char,int> Chars;
 public:
     int lengthOfLongestSubstring(string s) {
+        unordered_map<char,int> Chars;
         int longestSubstr=0;
-        int currSubstr=0;
-        int i;
-        for(i=0;i<s.length();i++){
+        int start=0;
+        for(int i=0;i<s.length();i++){
             if(Chars.find(s[i])!=Chars.end()){
-                if(longestSubstr<currSubstr){
-                    longestSubstr=currSubstr;
-                }
-                else{
-                    currSubstr=1;
-                }
-            }else{
-                Chars[s[i]]=i;
-                currSubstr++;
-            } 
-        }
-        if(longestSubstr<currSubstr){
-            longestSubstr=currSubstr;
+                start=max(start,Chars[s[i]]+1);
+            }
+            longestSubstr=max(longestSubstr,i-start+1);
+            Chars[s[i]]=i;
         }
         return longestSubstr;
     }
