@@ -4,8 +4,7 @@ using namespace std;
 class Solution {
     static const int mod=1e9+7;
     vector<vector<int>> v;
-    vector<vector<int>> generate(int numRows) {
-        vector<vector<int>> v;
+    void generate(int numRows) {
         for(int i=0;i<numRows;i++){
             v.push_back(vector<int>(i+1,1));
         }
@@ -14,7 +13,6 @@ class Solution {
                 v[i][j]=(v[i-1][j]+v[i-1][j-1])%mod;
             }
         }
-        return v;
     }
     int ways(vector<int>& nums){
         if(nums.size()<=2) return 1;
@@ -31,7 +29,7 @@ class Solution {
     }
 public:
     int numOfWays(vector<int>& nums){
-        v=generate(nums.size()+1);
+        generate(nums.size()+1);
         return ways(nums)-1;
     }
 };
