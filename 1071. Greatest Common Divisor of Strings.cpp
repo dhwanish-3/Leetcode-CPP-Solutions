@@ -2,20 +2,26 @@
 using namespace std;
 
 class Solution {
-    string modified(string& s1,string& s2){
-        while(s1.find(s2)==0){
-            s1=s1.substr(s2.length());
+    int gcd(int x,int y){
+        if(x<y){
+            int temp=x;
+            x=y;
+            y=temp;
         }
-        return s1;
+        while(y!=0){
+            int num=y;
+            y=x%y;
+            x=num;
+        }
+        return x;
     }
-public:
-    string gcdOfStrings(string str1, string str2) {
-        if(str1.length()<str2.length())
-            return gcdOfStrings(str2,str1);
-        if(str1.find(str2)==string::npos) return "";
-        if(str2.empty()) return str1;
-        return gcdOfStrings(str2,modified(str1,str2));
-    }
+ public:
+  string gcdOfStrings(string str1, string str2) {
+    int len1=str1.length();
+    int len2=str2.length();
+    int g=gcd(len1,len2);
+    // string gcdString=s
+  }
 };
 
 int main(){
