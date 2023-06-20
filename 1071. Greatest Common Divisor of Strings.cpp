@@ -20,7 +20,14 @@ class Solution {
     int len1=str1.length();
     int len2=str2.length();
     int g=gcd(len1,len2);
-    // string gcdString=s
+    string gcdString=str1.substr(0,g);
+    for(int i=0;i<len1/g;i++){
+        if(str1.substr(i*g,g)!=gcdString) return "";
+    }
+    for(int i=0;i<len2/g;i++){
+        if(str2.substr(i*g,g)!=gcdString) return "";
+    }
+    return gcdString;
   }
 };
 
