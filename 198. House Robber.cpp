@@ -4,13 +4,14 @@ using namespace std;
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        int odd=0,even=0;
-        for(int i=0;i<nums.size();i++){
-            if(i%2==0) even+=nums[i];
-            else odd+=nums[i];
+        if(nums.size()==1) return nums[0];
+        vector<int> dp(nums.size());
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<nums.size();i++){
+            dp[i]=max(dp[i-2]+nums[i],dp[i-1]);
         }
-        cout<<odd<<" "<<even<<endl;
-        return max(odd,even);
+        return dp[nums.size()-1];
     }
 };
 
