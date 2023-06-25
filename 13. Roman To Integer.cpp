@@ -26,7 +26,6 @@ public:
                 integer+=value(s[i]);
             }
         }
-        cout<<integer<<endl;
         return integer;
     }
 };
