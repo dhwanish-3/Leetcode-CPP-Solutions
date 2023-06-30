@@ -7,19 +7,34 @@ public:
         int len=s.length();
         int start=0;
         int end=0;
-        map<char,string> m1;
+        vector<string> m1(26,"dhwanish");
         map<string,char> m2;
         int count=0;
-        for(int i=1;i<len;i++){
-            if(i==len-1) cout<<s.substr(start);
-            if(s[i]==' '){
+        for(int i=0;i<len;i++){
+            if(i==len-1){
+                string find=m1[pattern[count]-'a'];
+                if(find=="dhwanish"){
+                    cout<<s.substr(start);
+                    m1[pattern[count]-'a']=s.substr(start);
+                    count++;
+                }else if(find!=s.substr(start,end-start)){
+                    return false;
+                }
+            }
+            else if(s[i]==' '){
+                string find=m1[pattern[count]-'a'];
                 end=i;
-                cout<<s.substr(start,end-start+1)<<endl;
-                m1[pattern[count]]=s.substr(start,end-start+1);
+                cout<<s.substr(start,end-start)<<endl;
+                if(find=="dhwanish"){
+                    m1[pattern[count]-'a']=s.substr(start,end-start);
+                }else if(find!=s.substr(start,end-start)){
+                    return false;
+                }
                 start=i+1;
                 count++;
             }
         }
+        cout<<count<<endl;
         return true;
     }
 };
