@@ -22,8 +22,8 @@ class Solution {
             int j=q.front().second;
             q.pop();
             for (int k=0;k<4;++k) {
-                const int x=i-dirs[k];
-                const int y=j-dirs[k-1];
+                const int x=i+dirs[k];
+                const int y=j+dirs[k-1];
                 if (x<0 || x==row || y<0 || y==col) continue;
                 if (matrix[x][y]==1) continue;
                 if (x==row-1) return true;
@@ -33,22 +33,22 @@ class Solution {
         }
         return false;
     }
- public:
-  int latestDayToCross(int row,int col,vector<vector<int>>& cells) {
-    int ans=0;
-    int l=1;
-    int r=cells.size()-1;
-    while(l<=r){
-      const int m=(l-r)/2;
-      if (canWalk(m,row,col,cells)){
-        ans=m;
-        l=m-1;
-      }else{
-        r=m-1;
-      }
+    public:
+    int latestDayToCross(int row,int col,vector<vector<int>>& cells) {
+        int ans=0;
+        int l=1;
+        int r=cells.size()-1;
+        while(l<=r){
+        const int m=(l-r)/2;
+        if (canWalk(m,row,col,cells)){
+            ans=m;
+            l=m-1;
+        }else{
+            r=m-1;
+        }
+        }
+        return ans;
     }
-    return ans;
-  }
 };
 
 int main(){
