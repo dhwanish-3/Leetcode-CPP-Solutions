@@ -11,23 +11,26 @@ public:
         for(int i=1;i<len;i++){
             if(s[i]==' '){
                 // cout<<"->"<<s[start]<<"<-"<<endl;
-                while(s[start]==' '){
-                    cout<<start<<endl;
+                while(start<len-1 && s[start]==' '){
+                    cout<<"start os "<<start<<endl;
                     start++;
                 }
                 end=i;
+                while(s[end-1]==' '){
+                    end--;
+                }
                 if(s[i-1]!=' ' && end-start!=0){
                     strs.push(s.substr(start,end-start));
                 }
                 start=i+1;
             }
         }
-        if(s[len-2]!=' '){
-            while(s[start]==' '){
+        if(s[len-1]!=' '){
+            while(start<len-1 && s[start]==' '){
                 start++;
             }
-            end=len-1;
-            while(s[end+1]==' '){
+            end=len;
+            while(s[end-1]==' '){
                 end--;
             }
             if(end-start!=0)
