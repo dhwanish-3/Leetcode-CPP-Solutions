@@ -36,6 +36,5 @@ int main(){
     cin>>s1;
     cin>>s2;
     cout<<Solution().gcdOfStrings(s1,s2);
-    
     return 0;
 }
