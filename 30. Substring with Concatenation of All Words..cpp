@@ -5,17 +5,18 @@ class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
         int k=words.size();
+        if (s.empty() || k==0) return {};
         int n=words[0].length();
         vector<int> sol;
         unordered_map<string,int> hash;
-        for(int i=0;i<n;i++){
-            hash[words[i]]++;
+        for(const string& word: words){
+            hash[word]++;
         }
         for(int i=0;i<s.length()-k*n+1;i++){
             unordered_map<string,int> visited;
             int j=0;
             for(;j<k;j++){
-                string word=s.substr(i+j*n,n);
+                const string& word=s.substr(i+j*n,n);
                 if(++visited[word]>hash[word]){
                     break;
                 }
