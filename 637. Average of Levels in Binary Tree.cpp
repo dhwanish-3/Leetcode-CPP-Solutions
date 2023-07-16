@@ -18,7 +18,7 @@ public:
         while (!q.empty()) {
             long sum = 0;
             int size = q.size();
-            for (int i=0 ;i <size ; i++) {
+            for (int i=0 ; i<size ; i++) {
                 TreeNode* node = q.front();
                 q.pop();
                 sum += node->val;

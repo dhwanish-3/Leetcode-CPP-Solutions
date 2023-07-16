@@ -17,7 +17,7 @@ public:
         int n = events.size();
         dp.resize(n, vector<int> (k + 1, -1));
         sort(events.begin(), events.end());
-        return maximumValue(events, 0 , k);
+        return maximumValue(events, 0, k);
     }
 };
 

@@ -7,7 +7,7 @@ public:
         string sol;
         int carry = 0;
         int len1 = a.length() - 1;
-        int len2 = b.length() -1;
+        int len2 = b.length() - 1;
         while (len1 >= 0 || len2 >= 0 || carry) {
             if (len1 >= 0) {
                 carry += a[len1] -'0';
