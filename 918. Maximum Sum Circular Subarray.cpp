@@ -14,8 +14,10 @@ public:
             curSum += nums[i];
             curMaxSum = max(curMaxSum + nums[i], nums[i]);
             curMinSum = min(curMinSum + nums[i], nums[i]);
+            cout <<"curMaxSum " <<curMaxSum <<"  curMinSum " << curMinSum << endl;
             maxSum = max(maxSum, curMaxSum);
             minSum = min(minSum, curMinSum);
+            cout <<"maxSum " <<maxSum <<"  minSum " << minSum << endl;
         }
         if (maxSum < 0) {
             return maxSum;

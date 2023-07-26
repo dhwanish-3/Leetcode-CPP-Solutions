@@ -34,6 +34,11 @@ int main(){
         cin >> v[i];
     }
     vector<vector<int>> sol = Solution().permute(v);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < sol.size(); i++) {
+        for (int j = 0; j < sol[i].size(); j++) {
+            cout << sol[i][j] << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
