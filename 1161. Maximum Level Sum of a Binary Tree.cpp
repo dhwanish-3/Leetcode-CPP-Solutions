@@ -34,10 +34,6 @@ public:
     }
 };
 
-TreeNode* insertBinaryTree(TreeNode* root,int val){
-    return root;
-}
-
 int main(){
     int n,in;
     TreeNode* root=new TreeNode(4);
