@@ -15,15 +15,6 @@ public:
 };
 
 class Solution {
-    Node* find(Node* head, int val) {
-        while(head){
-            if(head->val == val) {
-                return head;
-            }
-            head = head->next;
-        }
-        return nullptr;
-    }
 public:
     Node* copyRandomList(Node* head) {
         Node* dummy = new Node(0);
