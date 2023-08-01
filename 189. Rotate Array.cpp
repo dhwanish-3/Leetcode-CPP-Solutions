@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach 1: Using Extra Array
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
@@ -14,28 +15,41 @@ public:
     }
 };
 
-void rotate(vector<int>& nums, int k) {
-    int n = nums.size();
-    k %= n;
-    
-    int count = 0;
-    
-    for(int start = 0; count < n; ++start){
-        int cur = start;
-        //temporarily store the value k position before nums[next]
-        int prev = nums[cur];
-        do{
-            int next = (cur+k) % n;
-            // cout << "nums[" << next << "]: " << prev << endl;
-            swap(nums[next], prev);
-            cur = next;
-            ++count;
-        }while(cur != start);
+// Approach 2: O(1) Space
+class Solution {
+    void reverse(vector<int>& nums, int l, int r) {
+        while (l < r) {
+            swap(nums[l], nums[r]);
+            l++;
+            r--;
+        }
     }
-}
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k %= n;
+        int l = 0;
+        int r = n - k - 1;
+        reverse(nums, l, r);
+        l = n - k;
+        r = n - 1;
+        reverse(nums, l, r);
+        l = 0;
+        r = n - 1;
+        reverse(nums, l, r);
+    }
+};
 
 int main(){
-    
-    
+    int n,k;
+    cin >> n >> k;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    Solution().rotate(nums,k);
+    for(int i=0;i<n;i++){
+        cout << nums[i] << " ";
+    }
     return 0;
 }

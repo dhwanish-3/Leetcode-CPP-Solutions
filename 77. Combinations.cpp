@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach 1: Recursive
 class Solution {
     void dfs(int n, int k, int s, vector<int>&& path, vector<vector<int>>& sol) {
         if (path.size() == k) {
@@ -17,6 +18,28 @@ public:
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> sol;
         dfs(n, k, 1, {}, sol);
+        return sol;
+    }
+};
+
+// Approch 2: Iterative
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> sol;
+        vector<int> temp(k, 0);
+        int i = 0;
+        while ( i >= 0) {
+            temp[i]++;
+            if (temp[i] > n) {
+                i--;
+            } else if (i == k - 1) {
+                sol.push_back(temp);
+            } else {
+                i++;
+                temp[i] = temp[i - 1];
+            }
+        }
         return sol;
     }
 };
