@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach 1: DP - Memoization   --- Memory Limit Exceeded ---
 class Solution {
     int getSum(string s, int n) {
         int sum = 0;
@@ -36,6 +37,7 @@ public:
     }
 };
 
+// Approach 2: DP - Tabulation with space optimisation
 class Solution {
 public:
     int minimumDeleteSum(string s1, string s2) {
@@ -54,7 +56,7 @@ public:
             for (int j = 0; j < n; j++) {
                 if (s2[i] == s1[j]) {
                     temp[j + 1] = dp[j];
-                } else{
+                } else {
                     temp[j + 1] = min(dp[j] + s2[i] + s1[j], min(temp[j] + s1[j], dp[j + 1] + s2[i]));
                 }
             }
@@ -65,8 +67,8 @@ public:
 };
 
 int main(){
-    string s1,s2;
+    string s1, s2;
     cin >> s1 >> s2;
-    cout << Solution().minimumDeleteSum(s1,s2);
+    cout << Solution().minimumDeleteSum(s1, s2);
     return 0;
 }

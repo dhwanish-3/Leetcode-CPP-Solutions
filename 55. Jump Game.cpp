@@ -30,6 +30,18 @@ public:
     }
 };
 
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        int i = 0;
+        for (int reach = 0; i < n && reach <= n; i++) {
+            reach = max(reach, i + nums[i]);
+        }
+        return i == n;
+    }
+};
+
 int main(){
     int n;
     cin>>n;
