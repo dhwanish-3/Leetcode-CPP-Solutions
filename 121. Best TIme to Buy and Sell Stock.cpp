@@ -1,17 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Dynamic Programming
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int maxProfit=0;
-        int buyPrice=INT_MIN;
-        for(int i=0;i<prices.size();i++){
-            maxProfit=max(maxProfit,buyPrice+prices[i]);
-            buyPrice=max(buyPrice,-prices[i]);
+        int buy = INT_MAX;
+        int profit = 0;
+        int maximumProfit = 0;
+        int n = prices.size();
+        for (int i = 0; i < n; i++) {
+            buy = min(buy, prices[i]);
+            profit = prices[i] - buy;
+            maximumProfit = max(maximumProfit, profit);
         }
-        return maxProfit;
+        return maximumProfit;
     }
 };
 

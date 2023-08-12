@@ -4,17 +4,22 @@ using namespace std;
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();
-        for(int i=0;i<n/2;i++){
-            int max=n-i-1;
-            for(int j=i;j<max;j++){
-                int offset=j-i;
-                int top=matrix[i][j];
-                matrix[i][j]=matrix[max-offset][i];
-                matrix[max-offset][i]=matrix[max][max-offset];
-                matrix[max][max-offset]=matrix[j][max];
-                matrix[j][max]=top;
+        int n = matrix.size();
+        int i = 0;
+        int last = n - 1;
+        int temp = 0;
+        int size = n;
+        while (i < n / 2) {
+            for (int j = i; j < size - 1; j++) {
+                temp = matrix[i][j];
+                last = n - j - 1;
+                matrix[i][j] = matrix[last][i];
+                matrix[last][i] = matrix[n - i - 1][last];
+                matrix[n - i -1][last] = matrix[j][n - i - 1];
+                matrix[j][n - i - 1] = temp;
             }
+            i++;
+            size--;
         }
     }
 };
