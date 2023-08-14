@@ -4,7 +4,7 @@ using namespace std;
 // Approach 1: Recursion - TLE
 class Solution {
     void dfs(vector<vector<int>>& grid, int m, int n, int i, int j, int& count) {
-        if (i == m && j == n) {
+        if (i == m && j == n && grid[i][j] == 0) {
             count++;
             return;
         }
@@ -24,7 +24,31 @@ public:
     }
 };
 
-// Approach 2: 2D DP
+// Approach 2: DP - Memoization
+class Solution {
+    int dfs(vector<vector<int>>& grid, int m, int n, int i, int j, vector<vector<int>>& dp) {
+        if (i == m - 1 && j == n - 1 && grid[i][j] == 0) {
+            return 1;
+        }
+        if (i >= m || j >= n || grid[i][j] == 1) {
+            return 0;
+        }
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+        dp[i][j] = dfs(grid, m, n, i + 1, j, dp) + dfs(grid, m, n, i, j + 1, dp);
+        return dp[i][j];
+    }
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, -1));
+        return dfs(grid, m, n, 0 , 0, dp);
+    }
+};
+
+// Approach 3: 2D DP
 class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& grid) {
@@ -41,7 +65,7 @@ public:
     }
 };
 
-// Approach 3: 1D DP
+// Approach 4: 1D DP
 class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& grid) {

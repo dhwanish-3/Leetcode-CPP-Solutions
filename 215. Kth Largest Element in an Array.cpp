@@ -16,6 +16,28 @@ public:
     }
 };
 
+struct compare {
+    bool operator()(const int& a, const int& b) {
+        return a > b;
+    }
+};
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int n = nums.size();
+        priority_queue<int, vector<int>, compare> q;
+        for (int i = 0; i < k; i++) {
+            q.push(nums[i]);
+        }
+        for (int i = k; i < n; i++) {
+            if (nums[i] > q.top()) {
+                q.push(nums[i]);
+            }
+        }
+        return q.top();
+    }
+};
+
 int main(){
     int n, k;
     cin >> n >> k;
