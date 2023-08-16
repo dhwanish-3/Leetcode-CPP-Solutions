@@ -1,20 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Appraoch 1: Sliding Window
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char,int> Chars;
-        int longestSubstr=0;
-        int start=0;
-        for(int i=0;i<s.length();i++){
-            if(Chars.find(s[i])!=Chars.end()){
-                start=max(start,Chars[s[i]]+1);
+        int len = s.length();
+        unordered_set<char> hash;
+        int l = 0;
+        int maxLen = 0;
+        for (int r = 0; r < len; r++) {
+            while (hash.find(s[r]) != hash.end()) {
+                hash.erase(s[l]);
+                l++;
             }
-            longestSubstr=max(longestSubstr,i-start+1);
-            Chars[s[i]]=i;
+            hash.insert(s[r]);
+            maxLen = max(maxLen, r - l + 1);
         }
-        return longestSubstr;
+        return maxLen;
+    }
+};
+
+// Approah 2: Sliding Window Optimized
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int len = s.length();
+        unordered_map<char, int> hash;
+        int l = 0;
+        int maxLen = 0;
+        for (int r = 0; r < len; r++) {
+            if (hash.find(s[r]) == hash.end()) {
+                hash[s[r]] = r;
+            } else {
+                l = max(l, hash[s[r]] + 1);
+                hash[s[r]] = r;
+            }
+            maxLen = max(maxLen, r - l + 1);
+        }
+        return maxLen;
     }
 };
 

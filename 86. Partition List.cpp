@@ -9,6 +9,7 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// Apprach 1: Using Extra Space
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
@@ -33,6 +34,53 @@ public:
         ListNode* ans = dummy->next;
         delete dummy;
         return ans;
+    }
+};
+
+// Approach 2: Without Using Extra Space
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+        ListNode* cur = nullptr;
+        ListNode* curHead = nullptr;
+        ListNode* greater = nullptr;
+        ListNode* greatHead = nullptr;
+        ListNode* next = nullptr;
+        while (head) {
+            next = head->next;
+            if (head->val >= x) {
+                if (greatHead) {
+                    greater->next = head;
+                    greater = head;
+                } else {
+                    greatHead = head;
+                    greater = head;
+                    greatHead->next = nullptr;
+                }
+            } else {
+                if (curHead) {
+                    cur->next = head;
+                    cur = head;
+                } else {
+                    curHead = head;
+                    cur = head;
+                    curHead->next = nullptr;
+                }
+            }
+            head = next;
+        }
+        if (cur) {
+            cur->next = greatHead;
+        } else {
+            curHead = greatHead;
+        }
+        if (greater) {
+            greater->next = nullptr;
+        }
+        return curHead;
     }
 };
 
