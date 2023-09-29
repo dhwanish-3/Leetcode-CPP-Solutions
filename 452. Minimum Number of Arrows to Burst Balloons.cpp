@@ -2,18 +2,21 @@
 using namespace std;
 
 class Solution {
+    static bool compare(const vector<int>& a, const vector<int>& b) {
+        return a[1] < b[1];
+    }
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
-        sort(points.begin(),points.end(),[](const auto& a, const auto& b) { return  a[1] < b[1];});
-        int sol = 1;
-        int arrowX = points[0][1];
-        for (int i=1; i<points.size(); i++) {
-            if(points[i][0] > arrowX) {
-                arrowX = points[i][1];
-                sol++;
+        sort(points.begin(), points.end(), compare);
+        int select = points[0][1];
+        int arrows = 1;
+        for (int i = 1; i < points.size(); i++) {
+            if (points[i][0] > select) {
+                arrows++;
+                select = points[i][1];
             }
         }
-        return sol;
+        return arrows;
     }
 };
 
