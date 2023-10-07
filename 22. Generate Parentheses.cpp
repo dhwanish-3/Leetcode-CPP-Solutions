@@ -2,26 +2,27 @@
 using namespace std;
 
 class Solution {
-    void dfs(int l, int r, string&& path, vector<string>& sol) {
-        if (l == 0 && r == 0) {
-            sol.push_back(path);
+    void recursion(int open, int close, vector<string>& sol, string s) {
+        if (open == 0 && close == 0) {
+            sol.push_back(s);
             return;
         }
-        if (l > 0) {
-            path.push_back('(');
-            dfs(l - 1, r, move(path), sol);
-            path.pop_back();
+        if (close < open) {
+            return;
         }
-        if (l < r) {
-            path.push_back(')');
-            dfs(l, r - 1, move(path), sol);
-            path.pop_back();
+        if (open == 0) {
+            recursion(open, close - 1, sol, s + ")");
+        } else if(close == 0) {
+            return;
+        } else {
+            recursion(open - 1, close, sol, s + "(");
+            recursion(open, close - 1, sol, s + ")");
         }
     }
 public:
     vector<string> generateParenthesis(int n) {
         vector<string> sol;
-        dfs(n, n, {}, sol);
+        recursion(n, n, sol, "");
         return sol;
     }
 };

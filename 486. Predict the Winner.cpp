@@ -1,7 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Approach 1: 2D DP
+// Approach 3: DP - Memoization
+class Solution {
+    int recursion(vector<int>& nums, int i, int j, vector<vector<int>>& dp) {
+        if (i > j) {
+            return 0;
+        }
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+        int left = nums[i] - recursion(nums, i + 1, j, dp);
+        int right = nums[j] - recursion(nums, i, j - 1, dp);
+        return dp[i][j] = max(left, right);
+    }
+public:
+    bool predictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int>(n, -1));
+        return recursion(nums, 0, n - 1, dp) >= 0;
+    }
+};
+
+// Approach 2: 2D DP
 class Solution {
 public:
     bool PredictTheWinner(vector<int>& nums) {
@@ -19,7 +40,7 @@ public:
     }
 };
 
-// Approach 2: 1D DP
+// Approach 3: 1D DP
 class Solution {
 public:
     bool PredictTheWinner(vector<int>& nums) {
