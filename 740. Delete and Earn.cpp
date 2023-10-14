@@ -4,18 +4,16 @@ using namespace std;
 class Solution {
 public:
     int deleteAndEarn(vector<int>& nums) {
-        vector<int> bucket(10001,0);
-        for(int i=0;i<nums.size();i++){
-            bucket[nums[i]]+=nums[i];
+        int sum[10001] = {0};
+        for (int i = 0; i < nums.size(); i++) {
+            sum[nums[i]] += nums[i];
         }
-        int prev1=0;
-        int prev2=0;
-        for(int i=0;i<bucket.size();i++){
-            int dp=max(prev1,prev2+bucket[i]);
-            prev2=prev1;
-            prev1=dp;
+        int dp[10001] = {0};
+        dp[1] = sum[1];
+        for (int i = 2; i < 10001; i++) {
+            dp[i] = max(dp[i - 1], sum[i] + dp[i - 2]);
         }
-        return prev1;
+        return dp[10000];
     }
 };
 
