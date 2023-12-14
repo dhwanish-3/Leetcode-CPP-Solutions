@@ -4,3 +4,7 @@ gitignore
 a.exe
 
 .vscode
+
+*.exe
+
+*.o
