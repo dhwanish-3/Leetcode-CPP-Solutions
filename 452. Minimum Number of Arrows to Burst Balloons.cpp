@@ -20,13 +20,13 @@ public:
     }
 };
 
-int main(){
+int main() {
     int n;
-    cin>>n;
+    cin >> n;
     vector<vector<int>> v(n, vector<int> (2));
-    for ( int i=0; i<n; i++) {
-        cin>>v[i][0]>>v[i][1];
+    for (int i = 0; i < n; i++) {
+        cin >> v[i][0] >> v[i][1];
     }
-    cout<<Solution().findMinArrowShots(v);
+    cout << Solution().findMinArrowShots(v);
     return 0;
 }
