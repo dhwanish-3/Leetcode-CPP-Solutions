@@ -27,6 +27,23 @@ public:
 };
 
 int main() {
-    
+    int n, m;
+    cin >> n >> m;
+    vector<string> foods(n);
+    vector<string> cuisines(n);
+    vector<int> ratings(n);
+    for (int i = 0; i < n; i++) {
+        cin >> foods[i] >> cuisines[i] >> ratings[i];
+    }
+    FoodRatings* obj = new FoodRatings(foods, cuisines, ratings);
+    for (int i = 0; i < m; i++) {
+        string food;
+        int newRating;
+        cin >> food >> newRating;
+        obj->changeRating(food, newRating);
+    }
+    string cuisine;
+    cin >> cuisine;
+    cout << obj->highestRated(cuisine);
     return 0;
 }
