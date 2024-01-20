@@ -1,18 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-Dynamic Programming : Bottom Up (Tabulation)
+// Dynamic Programming : Bottom Up (Tabulation)
 class Solution {
 public:
     int climbStairs(int n) {
-        if(n<=3) return n;
-        vector<int> steps(n);
-        steps[0]=1;
-        steps[1]=2;
-        for(int i=2;i<n;i++){
-            steps[i]=steps[i-1]+steps[i-2];
+        vector<int> dp(n + 1, 0);
+        if (n == 1 || n == 2) {
+            return n;
         }
-        return steps[n-1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i < n + 1; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 };
 
