@@ -6,25 +6,20 @@ public:
     int evalRPN(vector<string>& tokens) {
         stack<int> stk;
         int n = tokens.size();
-        for (int i=0 ; i<n; i++) {
-            string s = tokens[i];
-            if (s=="+" || s=="-" || s=="*" || s=="/") {
-                int x = stk.top();
+        for (string s : tokens) {
+            if (s == "+" || s == "-" || s == "*" || s == "/") {
+                int a = stk.top();
                 stk.pop();
-                int y = stk.top();
+                int b = stk.top();                            
                 stk.pop();
-                int res = 0;
-                if (s=="+") res = x + y;
-                else if (s=="-") res = y - x;
-                else if (s=="*") res = x * y;
-                else if (s=="/") res = y / x;
-                stk.push(res);
+                if (s == "+") stk.push(a + b);
+                else if (s == "-") stk.push(b - a);
+                else if (s == "*") stk.push(a * b);
+                else stk.push(b / a);
             } else {
-                int num = stoi(s);
-                stk.push(num);
+                stk.push(stoi(s));
             }
         }
-        cout<<stk.size()<<endl;
         return stk.top();
     }
 };
