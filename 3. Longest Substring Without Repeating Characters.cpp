@@ -42,9 +42,9 @@ public:
     }
 };
 
-int main(){
+int main() {
     string s;
-    cin>>s;
-    cout<<Solution().lengthOfLongestSubstring(s);    
+    cin >> s;
+    cout << Solution().lengthOfLongestSubstring(s);    
     return 0;
 }
