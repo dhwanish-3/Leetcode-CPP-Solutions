@@ -7,16 +7,17 @@ class Solution {
     }
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
+        int n = points.size();
         sort(points.begin(), points.end(), compare);
-        int select = points[0][1];
-        int arrows = 1;
-        for (int i = 1; i < points.size(); i++) {
-            if (points[i][0] > select) {
-                arrows++;
-                select = points[i][1];
+        int sol = 1;
+        vector<int> cur = points[0];
+        for (int i = 1; i < n; i++) {
+            if (cur[1] < points[i][0]) {
+                cur = points[i];
+                sol++;
             }
         }
-        return arrows;
+        return sol;
     }
 };
 
