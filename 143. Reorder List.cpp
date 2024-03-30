@@ -9,6 +9,7 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// Solution 1: O(n) time, O(n) space
 class Solution {
 public:
     void reorderList(ListNode* head) {
@@ -32,6 +33,37 @@ public:
             cur = last->next;
         }
         cur->next = nullptr;
+    }
+};
+
+// Solution 2: O(n) time, O(1) space
+class Solution2 {
+public:
+    void reorderList(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        ListNode* next = nullptr;
+        ListNode* prev = nullptr;
+        while (slow) {
+            next = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = next;
+        }
+        ListNode* cur = head;
+        ListNode* next2 = nullptr;
+        while (cur && prev) {
+            next = cur->next;
+            next2 = prev->next;
+            cur->next = prev;
+            prev->next = next;
+            cur = next;
+            prev = next2;
+        }
     }
 };
 

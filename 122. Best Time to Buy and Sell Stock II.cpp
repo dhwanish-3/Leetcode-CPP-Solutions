@@ -2,16 +2,25 @@
 using namespace std;
 
 class Solution {
-public:
-    int maxProfit(vector<int>& prices) {
-        int n=prices.size();
-        int maxy=0;
-        int buy=INT_MIN;
-        for(int i=0;i<n;i++){
-            maxy=max(maxy,buy+prices[i]);
-            buy=max(buy,maxy-prices[i]);
+    int recursion(vector<int>& arr, int i, bool buy) {
+        if (i == arr.size()) {
+            return 0;
         }
-        return maxy;
+        if (buy) {
+            return max(-arr[i] + recursion(arr, i + 1, !buy), recursion(arr, i + 1, buy));
+        } else {
+            return max(arr[i] + recursion(arr, i + 1, !buy), recursion(arr, i + 1, buy));
+        }
+    }
+public:
+    int maxProfit(vector<int>& arr) {
+        int n = arr.size();
+        int prevBuy = 0, prevSell = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            prevSell = max(arr[i] + prevBuy, prevSell);
+            prevBuy = max(-arr[i] + prevSell, prevBuy);
+        }
+        return prevBuy;
     }
 };
 class Solution {
