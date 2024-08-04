@@ -2,6 +2,10 @@
 gitignore
 
 a.exe
+a.out
+
+# any file that starts with alphabet
+[a-z]*.*
 
 .vscode
 
