@@ -18,9 +18,9 @@ public:
     }
 };
 
-int main(){
+int main() {
     int n;
-    cin>>n;
-    cout<<Solution().mySqrt(n);
+    cin >> n;
+    cout << Solution().mySqrt(n);
     return 0;
 }
