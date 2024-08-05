@@ -40,39 +40,36 @@ public:
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        if (nums.empty()) {
-            return {-1, -1};
-        }
         int n = nums.size();
-        int l = 0;
-        int r = n - 1;
-        int start = -1;
-        int end = -1;
+        int l = 0, r = n - 1;
+        int left = -1, right = -1;
         while (l <= r) {
             int mid = (l + r) / 2;
-            if (nums[mid] == target) {
-                start = mid;
-            }
-            if (nums[mid] >= target) {
-                r = mid - 1;
-            } else {
+            if (nums[mid] < target) {
                 l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+            if (nums[mid] == target) {
+                left = mid;
             }
         }
-        l = 0;
-        r = n - 1;
+        if (left == -1)
+            return {left, right};
+        right = left;
+        l = left, r = n - 1;
         while (l <= r) {
             int mid = (l + r) / 2;
-            if (nums[mid] == target) {
-                end = mid;
-            }
             if (nums[mid] <= target) {
                 l = mid + 1;
             } else {
-                r = mid - 1;
+                r = mid -1;
+            }
+            if (nums[mid] == target) {
+                right = mid;
             }
         }
-        return {start, end};
+        return {left, right};
     }
 };
 
