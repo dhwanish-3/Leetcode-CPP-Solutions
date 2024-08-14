@@ -66,6 +66,25 @@ public:
     }
 };
 
+// Using Binary Search
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> subSequence;
+        subSequence.push_back(nums[0]);
+        for (int i = 1; i < n; i++) {
+            if (subSequence[subSequence.size() - 1] < nums[i]) {
+                subSequence.push_back(nums[i]);
+            } else {
+                auto it = lower_bound(subSequence.begin(), subSequence.end(), nums[i]);
+                *it = nums[i];
+            }
+        }
+        return subSequence.size();
+    }
+};
+
 int main() {
     int n;
     cin >> n;

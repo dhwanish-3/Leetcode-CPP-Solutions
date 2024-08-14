@@ -1,52 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// input n >= 3
 class Solution {
-    // Approach 1 : DP - memoization
-    int recursion(int n, vector<int>& dp) {
-        if (n == 1) {
-            return 1;
-        }
-        if (dp[n] != -1) {
-            return dp[n];
-        }
-        int maxProduct = 2;
-        for (int i = n - 1; i > 0; i--) {
-            maxProduct = max(maxProduct, i * recursion(n - i, dp));
-        }
-        return dp[n] = maxProduct;
+    int rec(int n, int i, vector<vector<int>>& dp) {
+        if (n == 0 || i == 0) return 1;
+        if (dp[n][i] != -1) return dp[n][i];
+        if (i > n) return dp[n][i] = rec(n, i - 1, dp);
+        return dp[n][i] = max(i * rec(n - i, i, dp), rec(n, i - 1, dp));
     }
 public:
-    // Approach 2 : DP - Tabalation - O(n^2)
-    int integerBreakN2(int n) {
-        if (n < 4) {
-            return n - 1;
-        }
-        vector<int> dp(n + 1, 1);
-        dp[2] = 2;
-        dp[3] = 3;
-        for (int i = 4; i <= n; i++) {
-            for (int j = i - 1; j > 0; j--) {
-                dp[i] = max(dp[i], j * dp[i - j]);
+    int integerBreak(int n) {
+        vector<vector<int>> dp(n + 1, vector<int>(n, 1));
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j < n; j++) {
+                if (j > i)
+                    dp[i][j] = dp[i][j - 1];
+                else dp[i][j] = max(j * dp[i - j][j], dp[i][j - 1]);
             }
         }
-        return dp[n];
+        return dp[n][n - 1];
     }
-    // Approach 3 : DP - Tabulation - O(n)
-    int integerBreak(int n) {
-        if (n < 4) {
-            return n - 1;
-        }
-        vector<int> dp(n + 1, 1);
-        dp[2] = 2;
-        dp[3] = 2;
-        for (int i = 4; i <= n; i++) {
-            dp[i] = max(dp[i - 2] * 2, dp[i - 3] * 3);
-        }
-        return dp[n];
-    }
-    // Approach 4 : Math - O(1)
     int integerBreakMath(int n) {
         if (n < 4) {
             return n - 1;
