@@ -18,12 +18,12 @@ public:
 };
 
 int main(){
-    int n,in;
-    cin>>n;
+    int n, in;
+    cin >> n;
     vector<int> v(n);
-    for(int i=0;i<n;i++){
-        cin>>v[i];
+    for(int i = 0; i < n; i++){
+        cin >> v[i];
     }
-    cout<<Solution().maxProfit(v);
+    cout << Solution().maxProfit(v);
     return 0;
 }
