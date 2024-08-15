@@ -3,21 +3,15 @@ using namespace std;
 
 class Solution {
 public:
-    int minimumTotal(vector<vector<int>>& triangle) {
-        int n = triangle.size();
+    int minimumTotal(vector<vector<int>>& tri) {
+        int n = tri.size();
         for (int i = 1; i < n; i++) {
-            triangle[i][0] += triangle[i - 1][0];
-            triangle[i][i] += triangle[i - 1][i - 1];
-        }
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < i; j++) {
-                triangle[i][j] += min(triangle[i - 1][j - 1], triangle[i - 1][j]);
+            for (int j = 0; j <= i; j++) {
+                tri[i][j] = tri[i][j] + min(j < i ? tri[i - 1][j] : INT_MAX, j > 0 ? tri[i - 1][j - 1] : INT_MAX);
+                cout << tri[i][j] << " ";
             }
+            cout << endl;
         }
-        int sol = INT_MAX;
-        for (int i = 0; i < triangle[n - 1].size(); i++) {
-            sol = min(sol, triangle[n - 1][i]);
-        }
-        return sol;
+        return *min_element(tri[n - 1].begin(), tri[n - 1].end());
     }
 };

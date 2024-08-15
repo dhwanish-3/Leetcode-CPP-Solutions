@@ -31,7 +31,7 @@ public:
             Node* u = q.front();
             q.pop();
             int size = u->neighbors.size();
-            for (int i=0 ; i<size ; i++) {
+            for (int i = 0; i < size; i++) {
                 Node* v = u->neighbors[i];
                 if (!oldToNew.count(v)) {
                     oldToNew[v] = new Node(v->val);
@@ -43,9 +43,3 @@ public:
         return oldToNew[node];
     }
 };
-
-int main(){
-    
-    
-    return 0;
-}

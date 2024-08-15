@@ -15,6 +15,11 @@ class Solution {
 public:
     int maxProfit(vector<int>& arr) {
         int n = arr.size();
+        vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i][0] = max(-arr[i] + dp[i + 1][1], dp[i + 1][0]);
+            dp[i][1] = max(arr[i] + dp[i + 1][0], dp[i + 1][1]);
+        }
         int prevBuy = 0, prevSell = 0;
         for (int i = n - 1; i >= 0; i--) {
             prevSell = max(arr[i] + prevBuy, prevSell);
@@ -26,7 +31,7 @@ public:
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int n=prices.size();
+        int n = prices.size();
         int buyPrice = 0;
         int sellPrice = 0;
         int Profit = 0;
@@ -46,11 +51,11 @@ public:
     }
 };
 
-int main(){
+int main() {
     int n;
-    cin>>n;
+    cin >> n;
     vector<int> v(n);
-    for(int i=0;i<n;i++) cin>>v[i];
-    cout<<Solution().maxProfit(v);
+    for(int i = 0; i < n; i++) cin >> v[i];
+    cout << Solution().maxProfit(v);
     return 0;
 }
