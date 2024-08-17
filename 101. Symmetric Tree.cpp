@@ -23,9 +23,3 @@ public:
         return symmetric(root, root);
     }
 };
-
-int main(){
-    
-    
-    return 0;
-}
