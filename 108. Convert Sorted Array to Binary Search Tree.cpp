@@ -14,7 +14,7 @@ class Solution {
     TreeNode* buildBST(vector<int>& nums, int l, int r) {
         if (l > r) return nullptr;
         int m = (l + r) / 2;
-        TreeNode* left = buildBST(nums, l, m-1);
+        TreeNode* left = buildBST(nums, l, m - 1);
         TreeNode* right = buildBST(nums, m + 1, r);
         TreeNode* newNode = new TreeNode(nums[m], left, right);
         return newNode;
@@ -24,12 +24,3 @@ public:
         return buildBST(nums, 0, nums.size() - 1);
     }
 };
-
-int main(){
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    for(int i=0 ; i<n; i++) cin>>v[i];
-    TreeNode* sol = Solution().sortedArrayToBST(v);
-    return 0;
-}
