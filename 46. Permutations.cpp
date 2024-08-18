@@ -2,26 +2,21 @@
 using namespace std;
 
 class Solution {
-    void dfs(vector<int>& nums, vector<bool>&& used, vector<int>&& path, vector<vector<int>>& sol) {
-        if (path.size() == nums.size()) {
-            sol.push_back(path);
+    vector<vector<int>> sol;
+    void rec(vector<int>& nums, int i) {
+        if (i == nums.size()) {
+            sol.push_back(nums);
             return;
         }
-        for (int i = 0; i < nums.size(); i++) {
-            if (!used[i]) {
-                used[i] = true;
-                path.push_back(nums[i]);
-                dfs(nums, move(used), move(path), sol);
-                path.pop_back();
-                used[i] = false;
-            }
+        for (int j = i; j < nums.size(); j++) {
+            swap(nums[i], nums[j]);
+            rec(nums, i + 1);
+            swap(nums[i], nums[j]);
         }
     }
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> sol;
-        vector<bool> used(nums.size(), false);
-        dfs(nums, move(used), {}, sol);
+        rec(nums, 0);
         return sol;
     }
 };
