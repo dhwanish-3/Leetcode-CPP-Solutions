@@ -2,24 +2,23 @@
 using namespace std;
 
 class Solution {
-    void dfs(vector<int> candidates, int s, int target, vector<int>&& path, vector<vector<int>>& sol) {
+    vector<vector<int>> sol;
+    void rec(vector<int>& cand, int i, int target, vector<int>& cur) {
         if (target < 0) return;
         if (target == 0) {
-            sol.push_back(path);
+            sol.push_back(cur);
             return;
         }
-        for (int i = s; i < candidates.size(); i++) {
-            if (target - candidates[i] >= 0) {
-                path.push_back(candidates[i]);
-                dfs(candidates, i, target - candidates[i], move(path), sol);
-                path.pop_back();
-            }
+        for (int j = i; j < cand.size(); j++) {
+            cur.push_back(cand[j]);
+            rec(cand, j, target - cand[j], cur);
+            cur.pop_back();
         }
     }
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> sol;
-        dfs(candidates, 0, target, {}, sol);
+        vector<int> cur;
+        rec(candidates, 0, target, cur);
         return sol;
     }
 };

@@ -3,21 +3,22 @@ using namespace std;
 
 // Approach 1: Recursive
 class Solution {
-    void dfs(int n, int k, int s, vector<int>&& path, vector<vector<int>>& sol) {
-        if (path.size() == k) {
-            sol.push_back(path);
+    vector<vector<int>> sol;
+    void rec(int n, int i, int k, vector<int>& cur) {
+        if (k == cur.size()) {
+            sol.push_back(cur);
             return;
         }
-        for (int i = s; i <= n; i++) {
-            path.push_back(i);
-            dfs(n, k, i + 1, move(path), sol);
-            path.pop_back();
+        for (int j = i + 1; j <= n; j++) {
+            cur.push_back(j);
+            rec(n, j, k, cur);
+            cur.pop_back();
         }
     }
 public:
     vector<vector<int>> combine(int n, int k) {
-        vector<vector<int>> sol;
-        dfs(n, k, 1, {}, sol);
+        vector<int> cur;
+        rec(n, 0, k, cur);
         return sol;
     }
 };
