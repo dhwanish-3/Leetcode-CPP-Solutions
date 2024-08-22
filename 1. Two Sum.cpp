@@ -4,20 +4,18 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> sum;
-        map<int, int> hash;
-        for (int i = 0; i < nums.size(); i++) {
+        int n = nums.size();
+        unordered_map<int, int> hash;
+        for (int i = 0; i < n; i++) {
             hash[nums[i]] = i;
         }
-        for (int i = 0; i < nums.size(); i++) {
-            auto res = hash.find(target - nums[i]);
-            if (res != hash.end() && res->second != i) {                
-                sum.push_back(i);
-                sum.push_back(res->second);
-                return sum;
+        for (int i = 0; i < n; i++) {
+            auto it = hash.find(target - nums[i]);
+            if (it != hash.end()) {
+                if (it->second != i) return {i, it->second};
             }
         }
-        return sum;
+        return {};
     }
 };
 

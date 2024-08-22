@@ -21,20 +21,19 @@ public:
 
 // Approach 2: Recursive
 class Solution {
-    void dfs(vector<int>& nums, int s, vector<int>& path, vector<vector<int>>& sol) {
-        sol.push_back(path);
-        for (int i = s; i < nums.size(); i++) {
-            path.push_back(nums[i]);
-            dfs(nums, i + 1, path, sol);
-            path.pop_back();
+    vector<vector<int>> sol;
+    void rec(vector<int>& nums, int i, vector<int>& cur) {
+        sol.push_back(cur);
+        for (int j = i; j < nums.size(); j++) {
+            cur.push_back(nums[j]);
+            rec(nums, j + 1, cur);
+            cur.pop_back();
         }
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        int n = nums.size();
-        vector<vector<int>> sol;
-        vector<int> path;
-        dfs(nums, 0, path, sol);
+        vector<int> cur;
+        rec(nums, 0, cur);
         return sol;
     }
 };

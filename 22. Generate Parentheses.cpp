@@ -2,28 +2,22 @@
 using namespace std;
 
 class Solution {
-    void recursion(int open, int close, vector<string>& sol, string s) {
-        if (open == 0 && close == 0) {
-            sol.push_back(s);
+    void rec(int n, unordered_set<string>& sol, string s, int l, int r) {
+        if (l == n && r == n) {
+            sol.insert(s);
             return;
         }
-        if (close < open) {
-            return;
-        }
-        if (open == 0) {
-            recursion(open, close - 1, sol, s + ")");
-        } else if(close == 0) {
-            return;
-        } else {
-            recursion(open - 1, close, sol, s + "(");
-            recursion(open, close - 1, sol, s + ")");
+        if (l > n || r > n) return;
+        rec(n, sol, s + "(", l + 1, r);
+        if(l > r) {
+            rec(n, sol, s + ")", l, r + 1);
         }
     }
 public:
     vector<string> generateParenthesis(int n) {
-        vector<string> sol;
-        recursion(n, n, sol, "");
-        return sol;
+        unordered_set<string> sol;
+        rec(n, sol, "", 0, 0);
+        return vector<string>(sol.begin(), sol.end());
     }
 };
 
