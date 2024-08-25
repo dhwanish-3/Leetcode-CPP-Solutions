@@ -1,45 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct TrieNode {
-    vector<shared_ptr<TrieNode>> children;
-    bool isWord = false;
-    TrieNode() : children(26) {};
+class TrieNode {
+public:
+    vector<TrieNode*> data;
+    bool isEndOfWord;
+    TrieNode() {
+        data.resize(26);
+        isEndOfWord = false;
+    }
 };
 
 class Trie {
-    shared_ptr<TrieNode> root = make_shared<TrieNode>();
-    shared_ptr<TrieNode> find(string& prefix) {
-        shared_ptr<TrieNode> node = root;
-        for (char c : prefix) {
-            int i = c - 'a';
-            if (node->children[i] == nullptr) {
+    TrieNode* root;
+    TrieNode* find(string& prefix) {
+        TrieNode* cur = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            int ch = prefix[i] - 'a';
+            if (cur->data[ch] == nullptr) {
                 return nullptr;
             }
-            node = node->children[i];
+            cur = cur->data[ch];
         }
-        return node;
+        return cur;
     }
 public:
     Trie() {
-        
+        root = new TrieNode();
     }
     
     void insert(string word) {
-        shared_ptr<TrieNode> node = root;
-        for (char c : word) {
-            int i = c - 'a';
-            if (node->children[i] == nullptr) {
-                node->children[i] = make_shared<TrieNode> ();
+        int len = word.length();
+        TrieNode* cur = root;
+        for (int i = 0; i < len; i++) {
+            int ch = word[i] - 'a';
+            if (!cur->data[ch]) {
+                cur->data[ch] = new TrieNode();
             }
-            node = node->children[i];
+            cur = cur->data[ch];
         }
-        node->isWord = true;
+        cur->isEndOfWord = true;
     }
     
     bool search(string word) {
-        shared_ptr<TrieNode> node = find(word);
-        return node && node->isWord;
+        TrieNode* res = find(word);
+        return res && res->isEndOfWord;
     }
     
     bool startsWith(string prefix) {
@@ -47,10 +52,10 @@ public:
     }
 };
 
-int main(){
+int main() {
     Trie* obj = new Trie();
     obj->insert("word");
-    cout<<obj->search("word");
-    cout<<obj->startsWith("prefix");
+    cout << obj->search("word");
+    cout << obj->startsWith("prefix");
     return 0;
 }
