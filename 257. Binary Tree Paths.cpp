@@ -10,24 +10,33 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
-    void inorder(TreeNode* root, vector<string>& sol, string s) {
-        if (root == nullptr) {
-            return;
+    vector<string> sol;
+    void rec(TreeNode* root, string path) {
+        if (root) {
+            if (!root->left && !root->right) {
+                sol.push_back(path + to_string(root->val));
+                return;
+            }
+            path = path + to_string(root->val) + "->";
+            rec(root->left, path);
+            rec(root->right, path);
         }
-        if (root->left == nullptr && root->right == nullptr) {
-            s += to_string(root->val);
-            sol.push_back(s);
-        }
-        s += to_string(root->val);
-        s += "->";
-        inorder(root->left, sol, s);
-        inorder(root->right, sol, s);
     }
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
-        vector<string> sol;
-        inorder(root, sol, "");
+        rec(root, "");
         return sol;
     }
 };
