@@ -4,17 +4,18 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n = nums.size();
         unordered_map<int, int> hash;
+        int n = nums.size();
+    
         for (int i = 0; i < n; i++) {
-            hash[nums[i]] = i;
-        }
-        for (int i = 0; i < n; i++) {
-            auto it = hash.find(target - nums[i]);
-            if (it != hash.end()) {
-                if (it->second != i) return {i, it->second};
+            int first = nums[i];
+            int second = target - first;
+            if (hash.find(second) != hash.end()) {
+                return {i, hash[second]};
             }
+            hash[first] = i;
         }
+
         return {};
     }
 };

@@ -9,8 +9,8 @@ public:
     
     Node(int _val) {
         val = _val;
-        next = NULL;
-        random = NULL;
+        next = nullptr;
+        random = nullptr;
     }
 };
 
@@ -45,11 +45,3 @@ public:
         return copy;
     }
 };
-
-int main(){
-    int n;
-    cin>>n;
-    for(int i=0;i<n;i++)
-    
-    return 0;
-}

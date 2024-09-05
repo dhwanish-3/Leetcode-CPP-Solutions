@@ -1,40 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-class Solution {
-public:
-    int findKthLargest(vector<int>& nums, int k) {
-        priority_queue<int> maxHeap{nums.begin(), nums.end()};
-        int i = 1;
-        while (!maxHeap.empty()) {
-            if (i == k) {
-                return maxHeap.top();
-            }
-            maxHeap.pop();
-            i++;
-        }
-    }
-};
-
-struct compare {
-    bool operator()(const int& a, const int& b) {
-        return a > b;
-    }
-};
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
-        priority_queue<int, vector<int>, compare> q;
+        priority_queue<int, vector<int>, greater<int>> pq;
         for (int i = 0; i < k; i++) {
-            q.push(nums[i]);
+            pq.push(nums[i]);
         }
         for (int i = k; i < n; i++) {
-            if (nums[i] > q.top()) {
-                q.push(nums[i]);
+            if (nums[i] > pq.top()) {
+                pq.pop();
+                pq.push(nums[i]);
             }
         }
-        return q.top();
+        return pq.top();
     }
 };
 

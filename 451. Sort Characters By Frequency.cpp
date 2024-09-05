@@ -4,20 +4,17 @@ using namespace std;
 class Solution {
 public:
     string frequencySort(string s) {
-        unordered_map<char, int> mp;
+        vector<int> hash(128, 0);
         for (char c : s) {
-            mp[c]++;
+            hash[c - '0']++;
         }
-        vector<pair<int, char>> v;
-        for (auto p : mp) {
-            v.push_back({p.second, p.first});
-        }
-        sort(v.begin(), v.end(), greater<pair<int, char>>());
-        string sol = "";
-        for (auto p : v) {
-            sol += string(p.first, p.second);
-        }
-        return sol;
+        sort(s.begin(), s.end(), [hash](char& a,  char& b){
+            if (hash[a - '0'] == hash[b - '0']) {
+                return a > b;
+            }
+            return hash[a - '0'] > hash[b - '0'];
+        });
+        return s;
     }
 };
 

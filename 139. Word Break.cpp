@@ -61,13 +61,13 @@ public:
 
 int main(){
     string s;
-    cin>>s;
+    cin >> s;
     int n;
-    cin>>n;
+    cin >> n;
     vector<string> wordDict(n);
-    for(int i=0;i<n;i++){
-        cin>>wordDict[i];
+    for(int i = 0; i < n; i++) {
+        cin >> wordDict[i];
     }
-    cout<<Solution().wordBreak(s, wordDict);
+    cout << Solution().wordBreak(s, wordDict);
     return 0;
 }
